@@ -38,12 +38,12 @@ module.exports = {
     },
 
     // 非nginx调试，使用代理后端模式。
-    // proxy:{
-      // 'api':{
-        // target:'http://192.168.1.120:2026',
-        // changeOrigin: true,
-      // }
-    // },
+    proxy:{
+      '/api':{
+        target:'http://192.168.1.120:2026',
+        changeOrigin: true,
+      }
+    },
 
     before: require('./mock/mock-server.js')
   },
@@ -104,12 +104,6 @@ module.exports = {
             .optimization.splitChunks({
               chunks: 'all',
               cacheGroups: {
-                vue: {
-                  name: 'chunk-vuejs',
-                  test: /[\\/]node_modules[\\/]_?vue(.*)/,
-                  priority: 30,
-                  chunks: 'initial'
-                },
                 libs: {
                   name: 'chunk-libs',
                   test: /[\\/]node_modules[\\/]/,
@@ -119,8 +113,7 @@ module.exports = {
                 elementUI: {
                   name: 'chunk-elementUI', // split elementUI into a single package
                   priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
-                  chunks: 'initial'
+                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
                 },
                 commons: {
                   name: 'chunk-commons',

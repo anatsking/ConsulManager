@@ -23,7 +23,7 @@ def exp(account,collect_days,notify_days,notify_amount):
     try:
         ecs_list = consul_kv.get_services_meta(f'tencent_cloud_{account}_ecs').get('ecs_list',[])
         now = datetime.datetime.now()
-        for i in [x for x in ecs_list if x['exp'] != '按量']:
+        for i in ecs_list:
             exp_day = datetime.datetime.strptime(i['exp'], '%Y-%m-%d')
             if (exp_day - now).days <= collect_days:
                 notify_id = hashlib.md5(str(i).encode(encoding='UTF-8')).hexdigest()
@@ -192,7 +192,7 @@ def rds(account,region):
                              'status': '运行中' if i.Status == 1 else '非运行中',
                              'itype':{1:'主实例',2:'灾备实例',3:'只读实例'}[i.InstanceType],
                              'ver':i.EngineVersion,
-                             'exp': '按量' if i.DeadlineTime == "0000-00-00 00:00:00" else i.DeadlineTime.split(' ')[0],
+                             'exp': '-' if i.DeadlineTime == "0000-00-00 00:00:00" else i.DeadlineTime.split(' ')[0],
                              'cpu':f"{i.Cpu}核",
                              'mem':f"{round(i.Memory/1024)}GB",
                              'disk':f"{i.Volume}GB"

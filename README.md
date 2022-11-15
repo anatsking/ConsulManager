@@ -10,7 +10,7 @@
 [![OSCS Status](https://www.oscs1024.com/platform/badge/starsliao/ConsulManager.svg?size=small)](https://www.murphysec.com/dr/Zoyt5g0huRavAtItj2)
 </div>
 
-### 注意：v0.9版本开始镜像更换到华为云，旧版本的用户请修改[docker-compose.yml](https://github.com/starsliao/ConsulManager/blob/main/docker-compose.yml)内的镜像地址。
+### 注意：v0.9版本开始镜像更换到华为云，请修改[docker-compose.yml](https://github.com/starsliao/ConsulManager/blob/main/docker-compose.yml)内的镜像地址。
 - swr.cn-south-1.myhuaweicloud.com/starsl.cn/flask-consul:latest
 - swr.cn-south-1.myhuaweicloud.com/starsl.cn/nginx-consul:latest
 ---
@@ -41,12 +41,11 @@
   - ✔支持多云ECS的**资源、分组、标签**自动同步到Consul(提供Prometheus自动发现)。
   - ✔支持多云ECS信息自动同步到**JumpServer**。
   - ✔支持多云MySQL资源信息自动同步到Consul(提供Prometheus自动发现)。
-  - ✔支持作为Exporter：Prometheus可直接从云厂商采集部分MySQL指标。(弥补Mysqld_Exporter无法获取部分云MySQL指标的问题)
   - ✔支持多云**账户余额**与云资源**到期日**设置阈值告警通知。
 - 支持自建主机接入WEB管理，并支持WEB批量导入自建主机到Consul。
 - 提供了可查询分组、ECS、MySQL信息的页面，指标中加入了到期日等信息。
 - 提供了按需生成Prometheus配置与ECS、MySQL告警规则的功能。
-- 设计了多个支持同步的各字段展示的Node_Exporter、Mysqld_Exporter Grafana看板。
+- 设计了一个支持同步的各字段展示的Node_Exporter、Mysqld_Exporter Grafana看板。
 - **提供了一个支持1对多目标的Mysqld_exporter(官方main分支编译)：[使用1个mysqld_exporter就可以监控所有的MySQL了！](https://github.com/starsliao/ConsulManager/blob/main/docs/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AAmysqld_exporter%E7%9B%91%E6%8E%A7%E6%89%80%E6%9C%89%E7%9A%84MySQL%E5%AE%9E%E4%BE%8B.md)**
 
 ### 🚀站点与接口监控管理
@@ -118,10 +117,10 @@
 
 ### 💰赞赏
 ##### 🥇榜一大哥：**@浩哥**
-##### 🥈榜二大哥：**@Swancavalier** **@南城阿宇**
-##### 🥉榜三大哥：**@新的奇迹** **@李宫俊**  **@小明SQLBOY**
+##### 🥈榜二大哥：**@Swancavalier**
+##### 🥉榜三大哥：**@南城阿宇** **@新的奇迹** **@李宫俊**
 ##### 🏆榜N大哥：
-@mac🐬 🌈  @Stephen  @蔡志昆  @风与尘的誓约  @Initᯤ⁶ᴳ  @254209  @Runner91  @烂泥  @ASL·D·阿威  @惊雷  @默读自我  @MiracleWong
+@mac🐬 🌈  @Stephen  @蔡志昆  @风与尘的誓约  @Initᯤ⁶ᴳ  @254209  @Runner91  @烂泥  @ASL·D·阿威  @惊雷
 
 ---
 
@@ -131,7 +130,7 @@
 ---
 
 ### 🎃提交bug
-@会飞的鱼  [@奈](https://github.com/Wp516781950)  @Swancavalier  [@Show_Lo](https://github.com/ShowXian)  @郑不错  @init
+@会飞的鱼  [@奈](https://github.com/Wp516781950)  @Swancavalier  [@Show_Lo](https://github.com/ShowXian)
 
 ---
 
@@ -146,7 +145,3 @@
 ---
 
 # 💖感谢伟大的[Flask](https://github.com/pallets/flask)、[VUE](https://github.com/vuejs/vue)、[vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)
-
----
-
-![](https://starsl.cn/static/img/wegroups.png)

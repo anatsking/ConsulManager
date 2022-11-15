@@ -25,7 +25,7 @@
       <el-upload
         style="margin-right: 9px;"
         class="upload-demo"
-        action="/api/selfrds/upload"
+        action="/api/selfnode/upload"
         :headers="myHeaders"
         :on-success="success"
         :on-error="error"
@@ -35,7 +35,7 @@
         :multiple="false"
       >
         <el-tooltip class="item" effect="light" content="点击【导出】可获取导入模板" placement="top">
-          <el-button v-waves style="margin-left: 9px;margin-top: 0px;" :loading="downloadLoading" class="filter-item" type="warning" icon="el-icon-upload2">
+          <el-button v-waves style="margin-left: 9px;" :loading="downloadLoading" class="filter-item" type="warning" icon="el-icon-upload2">
             导入
           </el-button>
         </el-tooltip>
@@ -93,7 +93,7 @@
           <span>{{ row.instance }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="os" label="主机系统" sortable align="center" width="80">
+      <el-table-column prop="os" label="系统" sortable align="center" width="80">
         <template slot-scope="{row}">
           <span>{{ row.os }}</span>
         </template>
@@ -131,7 +131,7 @@
           <el-form-item label="名称" prop="name">
             <el-input v-model="temp.name" placeholder="请输入" clearable />
           </el-form-item>
-          <el-form-item label="主机" prop="os">
+          <el-form-item label="系统" prop="os">
             <el-select v-model="temp.os" placeholder="请选择" style="width: 130px;" @change="temp.port=osport[temp.os]">
               <el-option label="linux" value="linux" />
               <el-option label="windows" value="windows" />
@@ -165,7 +165,7 @@
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
-import { getAllList, getAllInfo, addService, updateService, delService } from '@/api/selfrds'
+import { getAllList, getAllInfo, addService, updateService, delService } from '@/api/selfnode'
 export default {
   name: 'ComplexTable',
   components: { Pagination },
@@ -183,7 +183,7 @@ export default {
   data() {
     const validateInput = (rule, value, callback) => {
       if (!this.checkSpecialKey(value)) {
-        callback(new Error('不能含有空格或 [ ]`~!#$^&*=|"{}\':;?\\'))
+        callback(new Error('不能含有空格或 [ ]`~!#$^&*=|"{}\':;?'))
       } else {
         callback()
       }
@@ -214,7 +214,7 @@ export default {
       region_list: [],
       multipleSelection: [],
       del_dict: {},
-      osport: { linux: '3306', windows: '3306' },
+      osport: { linux: '9100', windows: '9182' },
       temp: {
         vendor: '',
         account: '',
@@ -343,7 +343,7 @@ export default {
       this.multipleSelection = val
     },
     checkSpecialKey(str) {
-      const specialKey = '[]`~!#$^&*=|{}\'":;? \\'
+      const specialKey = '[]`~!#$^&*=|{}\'":;? '
       for (let i = 0; i < str.length; i++) {
         if (specialKey.indexOf(str.substr(i, 1)) !== -1) {
           return false
@@ -394,7 +394,7 @@ export default {
         region: this.listQuery.region,
         group: this.listQuery.group,
         os: 'linux',
-        port: '3306'
+        port: '9100'
       }
       this.temp = Object.assign({}, this.temp, newone)
       this.dialogStatus = 'create'
@@ -435,7 +435,7 @@ export default {
               region: this.temp.region,
               group: this.temp.group,
               os: 'linux',
-              port: '3306'
+              port: '9100'
             }
             this.resetTemp()
             this.temp = Object.assign({}, this.temp, newtemp)
@@ -526,13 +526,13 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['机房/公司', '租户/部门', '区域/项目', '分组/环境', '名称', '实例(IP:端口)', '主机系统(linux/windows)']
+        const tHeader = ['机房/公司', '租户/部门', '区域/项目', '分组/环境', '名称', '实例(IP:端口)', '系统(linux/windows)']
         const filterVal = ['vendor', 'account', 'region', 'group', 'name', 'instance', 'os']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: 'selfrds-list'
+          filename: 'selfnode-list'
         })
         this.downloadLoading = false
       })

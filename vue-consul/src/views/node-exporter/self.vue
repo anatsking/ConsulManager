@@ -35,7 +35,7 @@
         :multiple="false"
       >
         <el-tooltip class="item" effect="light" content="点击【导出】可获取导入模板" placement="top">
-          <el-button v-waves style="margin-left: 9px;margin-top: 0px;" :loading="downloadLoading" class="filter-item" type="warning" icon="el-icon-upload2">
+          <el-button v-waves style="margin-left: 9px;" :loading="downloadLoading" class="filter-item" type="warning" icon="el-icon-upload2">
             导入
           </el-button>
         </el-tooltip>
@@ -183,7 +183,7 @@ export default {
   data() {
     const validateInput = (rule, value, callback) => {
       if (!this.checkSpecialKey(value)) {
-        callback(new Error('不能含有空格或 [ ]`~!#$^&*=|"{}\':;?\\'))
+        callback(new Error('不能含有空格或 [ ]`~!#$^&*=|"{}\':;?'))
       } else {
         callback()
       }
@@ -343,7 +343,7 @@ export default {
       this.multipleSelection = val
     },
     checkSpecialKey(str) {
-      const specialKey = '[]`~!#$^&*=|{}\'":;? \\'
+      const specialKey = '[]`~!#$^&*=|{}\'":;? '
       for (let i = 0; i < str.length; i++) {
         if (specialKey.indexOf(str.substr(i, 1)) !== -1) {
           return false

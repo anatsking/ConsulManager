@@ -5,9 +5,9 @@
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 yum -y install consul
-# 如果yum下载失败，可以直接下载RPM包安装
-wget https://rpm.releases.hashicorp.com/RHEL/7/x86_64/stable/consul-1.13.3-1.x86_64.rpm
-rpm -ivh ./consul-1.13.3-1.x86_64.rpm
+# 或者直接下RPM包安装(推荐)
+wget https://rpm.releases.hashicorp.com/RHEL/7/x86_64/stable/consul-1.12.2-1.x86_64.rpm
+rpm -ivh ./consul-1.12.2-1.x86_64.rpm
 ``` 
 
 #### 配置
@@ -38,26 +38,7 @@ systemctl enable consul.service
 systemctl start consul.service
 ```
 
-### 安装后首次获取登录Token（记录SecretID，即为Consul登录的Token）
+### 获取登录Token（记录SecretID，即为Consul登录的Token）
 ```bash
-consul acl bootstrap|grep SecretID
-```
-
-
-### 忘记global-management Token，重新生成
-```
-# 记录最后的reset index: xx
 consul acl bootstrap
-
-# 进入consul数据目录执行
-echo 13 > acl-bootstrap-reset
-
-# 重新创建一个global-management Token
-consul acl bootstrap
-```
-
-### consul kv 备份还原
-```
-consul kv export --http-addr=http://127.0.0.1:8500 -token=admin-token '' > consul_kv_bak.json
-consul kv import --http-addr=http://127.0.0.1:8500 -token=admin-token @consul_kv_bak.json
 ```

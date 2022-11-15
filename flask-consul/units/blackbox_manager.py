@@ -187,8 +187,6 @@ def get_pconfig():
     consul_server = consul_url.split("/")[2]
     pconfig = f"""
   - job_name: 'blackbox_exporter'
-    scrape_interval: 15s
-    scrape_timeout: 5s
     metrics_path: /probe
     consul_sd_configs:
       - server: '{consul_server}'

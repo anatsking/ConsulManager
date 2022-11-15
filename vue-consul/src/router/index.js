@@ -157,12 +157,14 @@ export const constantRoutes = [
             component: () => import('@/views/rds/lists'),
             meta: { title: '云MySQL列表', icon: 'el-icon-cloudy' }
           },
+          /**
           {
             path: 'self',
             name: '自建MySQL管理',
             component: () => import('@/views/rds/self'),
             meta: { title: '自建MySQL管理', icon: 'el-icon-s-platform' }
           },
+          */
           {
             path: 'pconfig',
             name: 'rds-pconfig',
@@ -266,6 +268,17 @@ export const constantRoutes = [
 
     ]
   },
+  {
+    path: '/settings',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: '全局配置',
+      component: () => import('@/views/ldap/index'),
+      meta: { title: '全局配置', icon: 'el-icon-chat-line-square' }
+    }]
+  },
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
